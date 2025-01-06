@@ -1,6 +1,7 @@
 package vttp5.paf.day21ws.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,7 +19,7 @@ public class BookService {
         return bookRepository.getBooks(author, limit);
     }
 
-    public Book getBookByAsin(String asin) {
+    public Optional<Book> getBookByAsin(String asin) {
         return bookRepository.getBookByAsin(asin);
     }
 }

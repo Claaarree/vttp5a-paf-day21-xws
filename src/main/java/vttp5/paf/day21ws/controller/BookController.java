@@ -1,6 +1,7 @@
 package vttp5.paf.day21ws.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatusCode;
@@ -33,9 +34,19 @@ public class BookController {
 
     @GetMapping("/books/{asin}")
     public ModelAndView getBookDetails(@PathVariable String asin) {
-        ModelAndView mav = new ModelAndView("details");
-        Book b = bookService.getBookByAsin(asin);
-        mav.addObject("book", b);
+        ModelAndView mav = new ModelAndView();
+        Optional<Book> opt = bookService.getBookByAsin(asin);
+
+        if(opt.isEmpty()) {
+            mav.setViewName("not-found");
+            mav.setStatus(HttpStatusCode.valueOf(404));
+            mav.addObject("message", "Cannot find book %s".formatted(asin));
+
+        } else{
+            mav.setViewName("details");
+            Book b = opt.get();
+            mav.addObject("book", b);
+        }
 
         return mav;
     }

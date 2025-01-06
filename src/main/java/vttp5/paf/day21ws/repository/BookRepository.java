@@ -2,6 +2,7 @@ package vttp5.paf.day21ws.repository;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -23,6 +24,7 @@ public class BookRepository {
         // first % is the escape character for the second % then %s is for the format then the last % is the same as the first 2
         // result would be %author% only
         // String.format("%%%s%%", author)
+        // "%%%s%%".formatted(author)
         SqlRowSet rs = template.queryForRowSet(Queries.SQL_SELECT_BOOKS, author, limit);
 
         while(rs.next()) {
@@ -32,12 +34,14 @@ public class BookRepository {
         return bookList;
     }
 
-    public Book getBookByAsin (String asin) {
+    public Optional<Book> getBookByAsin (String asin) {
         SqlRowSet rs = template.queryForRowSet(Queries.SQL_SELECT_ASIN, asin);
         // moving the cursor down to the row
-        rs.next();
-        Book b = Book.toBook(rs);
-
-        return b;
+        if(!rs.next()){
+            return Optional.empty();
+        } else {
+            Book b = Book.toBook(rs);
+            return Optional.of(b);
+        }
     }
 }

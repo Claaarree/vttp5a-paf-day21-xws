@@ -13,7 +13,7 @@ public class Book {
     private String url;
     private Float stars;
     private Integer reviews;
-    private Double price;
+    private Float price;
     private Date publishedDate;
     private String catName;
 
@@ -66,10 +66,10 @@ public class Book {
     public void setReviews(Integer reviews) {
         this.reviews = reviews;
     }
-    public Double getPrice() {
+    public Float getPrice() {
         return price;
     }
-    public void setPrice(Double price) {
+    public void setPrice(Float price) {
         this.price = price;
     }
     public Date getPublishedDate() {
@@ -94,7 +94,7 @@ public class Book {
         b.setUrl(rs.getString("producturl"));
         b.setStars(rs.getFloat("stars"));
         b.setReviews(rs.getInt("reviews"));
-        b.setPrice(rs.getDouble("price"));
+        b.setPrice(rs.getFloat("price"));
         b.setPublishedDate(rs.getDate("publisheddate"));
         b.setCatName(rs.getString("category_name"));
 
