@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Details</title>
+</head>
+<body>
+    <span th:object="${book}">
+        <p>Asin: <span th:text="*{asin}"></span></p>
+        <p>Title: <span th:text="*{title}"></span></p>
+        <p>Author: <span th:text="*{author}"></span></p>
+        <p>Sold by: <span th:text="*{soldBy}"></span></p>
+        <p>Image: <span><img th:src="*{img}" th:alt="*{img}" height="100px" width="100px"></span></p>
+        <p>Url: <span><a th:href="*{url}" th:text="*{url}"></a></span></p>
+        <p>Stars: <span th:text="*{stars}"></span></p>
+        <p>Reviews: <span th:text="*{reviews}"></span></p>
+        <p>Price: <span th:text="*{price}"></span></p>
+        <p>Published Date: <span th:text="*{#dates.format(publishedDate, 'dd/MM/yyyy')}"></span></p>
+        <p>Category name: <span th:text="*{catName}"></span></p>
+    </span>
+
+    <a th:href="@{/}">Back to landing</a>
+</body>
+</html>
